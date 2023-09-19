@@ -1,0 +1,47 @@
+Name: paho-mqtt-cpp
+Release:    1%{?dist}
+Version:    1.2.0
+Summary:    A C++ PDDL parser utilizing boost spirit.
+
+License:    EPL-1.0
+URL:        https://github.com/eclipse/paho.mqtt.cpp
+VCS:        https://github.com/eclipse/paho.mqtt.cpp/archive/refs/tags/v%{version}.tar.gz
+
+Source: v%{version}.tar.gz
+
+BuildRequires: g++ openssl-devel paho-c-devel cmake gcc-c++
+
+%package devel
+Requires:	%{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Summary: paho-mqtt-cpp devel files
+
+%description
+MQTT C++ client library on memory-managed operating systems such as Linux/Posix and Windows.
+
+%description devel
+This package contains necessary headers files for integrating paho-mqtt-cpp
+
+%prep
+%setup -T -b 0 -q -n paho.mqtt.cpp-%{version}
+
+%build
+%cmake
+%cmake_build
+
+%install
+%cmake_install
+mv %{buildroot}/%{_libdir}/../lib/* %{buildroot}/%{_libdir}/
+
+%check
+%ctest
+
+%files
+%{_libdir}/libpaho-mqttpp3.so
+%{_libdir}/libpaho-mqttpp3.so.*
+
+%files devel
+%{_includedir}/mqtt
+%{_libdir}/cmake/PahoMqttCpp
+
+%changelog
+{{{ git_dir_changelog }}}
