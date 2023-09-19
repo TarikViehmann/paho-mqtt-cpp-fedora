@@ -44,4 +44,6 @@ mv %{buildroot}/%{_libdir}/../lib/* %{buildroot}/%{_libdir}/
 %{_libdir}/cmake/PahoMqttCpp
 
 %changelog
+* Wed Sep 20 2023 Tarik Viehmann <viehmann@kbsg.rwth-aachen.de> - 1.2.0-1
+- Initial release
 {{{ git_dir_changelog }}}
